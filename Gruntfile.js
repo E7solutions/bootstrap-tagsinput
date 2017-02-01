@@ -56,7 +56,7 @@ module.exports = function(grunt) {
         		runnerPort: 9999,
         		singleRun: true,
         		autoWatch: false,
-        		browsers: ['PhantomJS']
+        		browsers: ['Chrome']
       	}
     	},
     	zip: {

@@ -145,5 +145,26 @@ describe("bootstrap-tagsinput", function() {
         });
       });
     });
+
+    describe("#349: Adding elements preserves order", function() {
+      testTagsInput('<input type="text" value="a,b,d,e" />', function() {
+        beforeEach(function() {
+          this.$element.tagsinput('focus');
+          this.$tagsinput_input.trigger($.Event('keydown', { which: 37 }));
+          this.$tagsinput_input.trigger($.Event('keydown', { which: 37 }));
+
+          var $inputWrapper = this.$element.tagsinput('findInputWrapper');
+          expect($inputWrapper.index()).toBe(2);
+        });
+        it("should add c, making 5 elements total", function() {
+           this.$tagsinput_input.val('c');
+           this.$tagsinput_input.trigger($.Event('keypress', { which: 13 }));
+
+           expect(this.$element.tagsinput('items').length).toBe(5);
+           expect(this.$element.tagsinput('items')[2]).toBe('c');
+        });
+      });
+    });
+
   });
 });
